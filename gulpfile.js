@@ -58,11 +58,11 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('default', ['message', 'copyHtml', 'imageMin', 'sass', 'scripts']);
+gulp.task('watch', function() {
+  gulp.watch('src/js/*.js', ['scripts']);
+  gulp.watch('src/images/*', ['imageMin']);
+  gulp.watch('src/sass/*.scss', ['sass']);
+  gulp.watch('src/*.html', ['copyHtml']);
+});
 
-// gulp.task('watch', function(){
-//   gulp.watch('src/js/*.js', ['scripts']);
-//   gulp.watch('src/images/*', ['imageMin']);
-//   gulp.watch('src/sass/*.scss', ['sass']);
-//   gulp.watch('src/*.html', ['copyHtml']);
-// });
+gulp.task('build', ['copyHtml', 'imageMin', 'sass', 'scripts', 'watch']);
